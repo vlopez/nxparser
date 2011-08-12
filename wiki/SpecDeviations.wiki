@@ -1,0 +1,5 @@
+#summary Deviations from the N3/Nq spec
+
+So far, only two deviations from the N3/Nq spec are known:
+* Parts of a statement (e.g. subject, predicate,...) are to be separated only by space, not by space or tab.
+* The statement-ending full stop must be preceded by a space.
