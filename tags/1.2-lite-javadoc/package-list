@@ -1,0 +1,6 @@
+org.semanticweb.yars.nx
+org.semanticweb.yars.nx.namespace
+org.semanticweb.yars.nx.parser
+org.semanticweb.yars.nx.util
+org.semanticweb.yars.util
+org.semanticweb.yars2.rdfxml
