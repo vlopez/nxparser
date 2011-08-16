@@ -12,6 +12,7 @@ Node[] nxx;
 while (test.hasNext())
      nxx = test.next();
 }}}
+    We'd like to point you [http://captsolo.net/info/blog_a.php/2011/02/21/p1094 here] for hints on how to use the classes from Python (thanks to Uldis Bojars).
  * Use a blank node:
 {{{
 Resource subjRes = new Resource("<http://example.org/123>", true);
@@ -23,7 +24,7 @@ Node[] triple = new Node[]{subjRes, predRes, bn};
 System.out.printf("%s %s %s .", triple[0].toN3(), triple[1].toN3(), triple[2].toN3());
 // yields <http://example.org/123> <http://example.org/123> _:bnodeId .
 }}}
- * Have a date literal:
+ * Use a date literal:
 {{{
 String dateString = "2011-08-16";
 Literal dateLiteral = new Literal(dateString, new Resource(XMLConstants.W3C_XML_SCHEMA_NS_URI + "#date"));
@@ -37,7 +38,7 @@ Node[] triple = new Node[]{bn, predRes, dateLiteral};
 System.out.printf("%s %s %s .", triple[0].toN3(), triple[1].toN3(), triple[2].toN3());
 // yields _:bnodeId <http://example.org/123> "2011-08-16"^^<http://www.w3.org/2001/XMLSchema#date> .
 }}}
- * Have unicode characters
+ * Use unicode characters
 {{{
 String japaneseString = ("祝福は、チーズのメーカーです。");
 Literal japaneseLiteral = new Literal(NxUtil.escapeForNx(japaneseString), "ja");
