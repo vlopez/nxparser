@@ -9,7 +9,7 @@ FileInputStream is = new FileInputStream("path/to/file.nq");
 NxParser nxp = new NxParser(is);
 
 Node[] nxx;
-while (test.hasNext())
+while (nxp.hasNext())
      nxx = test.next();
 }}}
     We'd like to point you [http://captsolo.net/info/blog_a.php/2011/02/21/p1094 here] for hints on how to use the classes from Python (thanks to Uldis Bojars).
