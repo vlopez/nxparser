@@ -52,3 +52,10 @@ System.out.printf("%s %s %s .", triple[0].toN3(), triple[1].toN3(), triple[2].to
 System.out.println(japaneseLiteral.getUnescapedData());
 // yields 祝福は、チーズのメーカーです。
 }}}
+
+* Get a Calendar object from an xsd:dateTime-typed Literal
+{{{
+Literal dtl; // parser-generated
+XSDDateTime dt = (XSDDateTime)DatatypeFactory.getDatatype(dtl); 
+GregorianCalendar cal = dt.getValue();
+}}}
