@@ -53,7 +53,7 @@ System.out.println(japaneseLiteral.getUnescapedData());
 // yields 祝福は、チーズのメーカーです。
 }}}
 
-* Get a Calendar object from an xsd:dateTime-typed Literal
+ * Get a Calendar object from an xsd:dateTime-typed Literal
 {{{
 Literal dtl; // parser-generated
 XSDDateTime dt = (XSDDateTime)DatatypeFactory.getDatatype(dtl); 
