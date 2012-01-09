@@ -12,6 +12,8 @@
 	<properties>
 		<maven.compile.encoding>UTF-8</maven.compile.encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compile.source>1.6</maven.compile.source>
+		<maven.compile.source>1.6</maven.compile.source>
 	</properties>
 
 	<repositories>
@@ -59,48 +61,11 @@
 
 	</dependencies>
 
-	<distributionManagement>
-		<!-- Add this to settings.xml <server> <id>xydra-repo</id> <username>xamde</username> 
-			<password>********</password> </server> <server> <id>xydra-snap</id> <username>xamde</username> 
-			<password>********</password> </server> <server> <id>xydra-site</id> <username>xamde</username> 
-			<password>********</password> </server> -->
-		<repository>
-			<id>nxparser-repo</id>
-			<url>svn:https://nxparser.googlecode.com/svn/repository</url>
-		</repository>
-		<snapshotRepository>
-			<id>nxparser-snapshots</id>
-			<url>svn:https://nxparser.googlecode.com/svn/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<scm>
 		<connection>svn:https://nxparser.googlecode.com/svn/trunk</connection>
 		<developerConnection>svn:https://nxparser.googlecode.com/svn/trunk</developerConnection>
 	</scm>
-
-	<profiles>
-
-		<profile>
-			<id>java15</id>
-			<properties>
-				<maven.compile.source>1.5</maven.compile.source>
-				<maven.compile.source>1.5</maven.compile.source>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>java16</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<maven.compile.source>1.6</maven.compile.source>
-				<maven.compile.source>1.6</maven.compile.source>
-			</properties>
-		</profile>
-
-	</profiles>
 
 	<build>
 		<!-- Support for deploying sites to scp://-Urls -->
@@ -116,6 +81,33 @@
 				<version>1.9</version>
 			</extension>
 		</extensions>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>org.semanticweb.yars.nx.cli.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>nxparser-repo</id>
+			<url>svn:https://nxparser.googlecode.com/svn/repository</url>
+		</repository>
+		<snapshotRepository>
+			<id>nxparser-snapshots</id>
+			<url>svn:https://nxparser.googlecode.com/svn/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
