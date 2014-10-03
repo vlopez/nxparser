@@ -1,112 +1,107 @@
 package org.semanticweb.yars.nx;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 
-import org.semanticweb.yars.util.Array;
+/**
+ * Basically a node array.
+ * 
+ * In addition, optionally the Nodes class can keep track of object
+ * references, and only use canonical object references for Node objects.
+ * 
+ * @author aharth
+ *
+ */
+public class Nodes implements Serializable, Comparable<Nodes> {
+	private static final long serialVersionUID = 1L;
 
-public class Nodes implements Comparable<Nodes>, Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1195176262281356050L;
-	
 	public static final Node[] EOM = new Node[0];
+
+	private final Node[] _data;
 	
-	Node[] _na;
-	NodeComparator _nc;
-	
-	public Nodes(Node... n){
-		this(NodeComparator.NC, n);
+	public Nodes(Node... na) {
+		_data = na;
+	}
+
+	public Nodes(Collection<Node> cn) {
+		_data = new Node[cn.size()];
+		cn.toArray(_data);
+	}
+
+	public Node[] getNodeArray() {
+		return _data;
+	}
+
+	boolean equals(Nodes n) {
+		return Arrays.equals(_data, n.getNodeArray());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		return (o instanceof Nodes) && equals((Nodes) o);
 	}
 	
-	public Nodes(Collection<Node> cn){
-		this(NodeComparator.NC, cn);
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(_data);
 	}
-	
-	public Nodes(NodeComparator nc, Collection<Node> cn){
-		_na = new Node[cn.size()];
-		cn.toArray(_na);
-		_nc = nc;
+
+	@Override
+	public int compareTo(Nodes o) {
+		if (this == o) {
+			return 0;
+		}
+
+		int min = Math.min(_data.length, o._data.length);
+
+		for (int i = 0; i < min; i++) {
+			int comp = _data[i].compareTo(o._data[i]);
+			if (comp != 0) {
+				return comp;
+			}
+		}
+
+		int diff = _data.length - o._data.length;
+		if (diff != 0) {
+			return diff;
+		}
+		
+		// same
+		return 0;
 	}
-	
-	public Nodes(NodeComparator nc, Node... n){
-		_na = n;
-		_nc = nc;
-	}
-	
-	public Node[] getNodes(){
-		return _na;
-	}
-	
-	public int compareTo(Nodes ns){
-		return _nc.compare(_na, ns.getNodes());
-	}
-	
-	public boolean equals(Nodes ns){
-		return _nc.equals(_na, ns.getNodes());
-	}
-	
-	public boolean equals(Object o){
-		if(o instanceof Nodes){
-			return equals((Nodes)o);
-		} return false;
-	}
-	
-	public String toN3(){
-		return toN3(_na);
-	}
-	
+
+	@Override
 	public String toString() {
-		return toN3();
+		return toN3(_data);
 	}
-	
-	public int hashCode(){
-		return hashCode(_na);
-	}
-	
-	public static String toN3(Node[] ns) {
-		StringBuffer buf = new StringBuffer();
-		for (Node n: ns){
-			buf.append(n.toN3());
+
+	static String toN3(Node[] ns) {
+		StringBuilder buf = new StringBuilder();
+		for (Node n : ns) {
+			buf.append(n.toString());
 			buf.append(" ");
 		}
 		buf.append(".");
 
 		return buf.toString();
 	}
-	
-	/**
-	 * Fast hashcode method for Node arrays
-	 */
-	public static int hashCode(Node... nx) {
-		return Array.hashCode(nx, 0, nx.length);
-	}
-	
-	/**
-	 * Fast hashcode method for Node arrays
-	 */
-	public static int hashCode(Node[] nx, int pos, int length) {
-		return Array.hashCode(nx, pos, length);
-	}
-	
-	public static void main (String args[]) throws IOException{
-		Node[] a1 = {new BNode("b1asdf"), new BNode("b2qwer")};
-		System.err.println(hashCode(a1));
-		System.err.println(new Nodes(a1).hashCode());
-		
-		Node[] a2 = {new BNode("b1asdf"), new BNode("b2qwer")};
-		System.err.println(hashCode(a2));
-		System.err.println(new Nodes(a2).hashCode());
-		
-		System.err.println(new Nodes(a1).equals(new Nodes(a2)));
-		System.err.println(new Nodes(a2).equals(new Nodes(a1)));
-		System.err.println(new Nodes(a1).equals(new Nodes(a1)));
-		
-		ObjectOutputStream oos = new ObjectOutputStream(System.out);
-		oos.writeObject(new Nodes(a1));
-		oos.close();
-	}
+//
+//	/**
+//	 * Fast hashcode method for Node arrays
+//	 */
+//	public static int hashCode(Node... nx) {
+//		return Array.hashCode(nx, 0, nx.length);
+//	}
+//
+//	/**
+//	 * Fast hashcode method for Node arrays
+//	 */
+//	public static int hashCode(Node[] nx, int pos, int length) {
+//		return Array.hashCode(nx, pos, length);
+//	}
 }

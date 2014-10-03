@@ -55,9 +55,10 @@ public class TldManager {
 //    	}
 //    }
 
-    // return the PLD for a URL, e.g. for www.oxfam.org.uk, return oxfam.org.uk
+    /**
+     * Return the PLD for a URL, e.g. for www.oxfam.org.uk, return oxfam.org.uk
+     */
     public String getPLD(URI url) {
-
     	try {
     		if (url.getScheme() == null) {
     			_log.info("no scheme: " + url);
