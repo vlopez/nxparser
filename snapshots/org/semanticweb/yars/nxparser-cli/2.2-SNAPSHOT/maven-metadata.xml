@@ -20,6 +20,12 @@
         <value>2.2-20150223.021122-2</value>
         <updated>20150223021122</updated>
       </snapshotVersion>
+      <snapshotVersion>
+        <classifier>with-dependencies</classifier>
+        <extension>jar</extension>
+        <value>2.2-20150223.021122-2</value>
+        <updated>20150223021122</updated>
+      </snapshotVersion>
     </snapshotVersions>
   </versioning>
 </metadata>
