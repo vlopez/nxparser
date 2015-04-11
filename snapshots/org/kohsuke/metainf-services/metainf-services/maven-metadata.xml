@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.kohsuke.metainf-services</groupId>
+  <artifactId>metainf-services</artifactId>
+  <versioning>
+    <versions>
+      <version>1.6-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150411131514</lastUpdated>
+  </versioning>
+</metadata>
